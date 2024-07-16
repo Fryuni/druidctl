@@ -7,89 +7,41 @@ A CLI for Apache Druid management.
 [![Downloads/week](https://img.shields.io/npm/dw/druidctl.svg)](https://npmjs.org/package/druidctl)
 
 <!-- toc -->
-
-- [druidctl](#druidctl)
-- [Usage](#usage)
-- [Commands](#commands)
+* [druidctl](#druidctl)
+* [Usage](#usage)
+* [Commands](#commands)
 <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g druidctl
 $ druidctl COMMAND
 running command...
 $ druidctl (--version)
-druidctl/0.0.0 darwin-x64 node-v20.15.0
+druidctl/0.0.0 linux-x64 node-v18.20.3
 $ druidctl --help [COMMAND]
 USAGE
   $ druidctl COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-- [`druidctl hello PERSON`](#druidctl-hello-person)
-- [`druidctl hello world`](#druidctl-hello-world)
-- [`druidctl help [COMMAND]`](#druidctl-help-command)
-- [`druidctl plugins`](#druidctl-plugins)
-- [`druidctl plugins add PLUGIN`](#druidctl-plugins-add-plugin)
-- [`druidctl plugins:inspect PLUGIN...`](#druidctl-pluginsinspect-plugin)
-- [`druidctl plugins install PLUGIN`](#druidctl-plugins-install-plugin)
-- [`druidctl plugins link PATH`](#druidctl-plugins-link-path)
-- [`druidctl plugins remove [PLUGIN]`](#druidctl-plugins-remove-plugin)
-- [`druidctl plugins reset`](#druidctl-plugins-reset)
-- [`druidctl plugins uninstall [PLUGIN]`](#druidctl-plugins-uninstall-plugin)
-- [`druidctl plugins unlink [PLUGIN]`](#druidctl-plugins-unlink-plugin)
-- [`druidctl plugins update`](#druidctl-plugins-update)
-
-## `druidctl hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ druidctl hello PERSON -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Who is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ druidctl hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [src/commands/hello/index.ts](https://github.com/Fryuni/druidctl/blob/v0.0.0/src/commands/hello/index.ts)_
-
-## `druidctl hello world`
-
-Say hello world
-
-```
-USAGE
-  $ druidctl hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ druidctl hello world
-  hello world! (./src/commands/hello/world.ts)
-```
-
-_See code: [src/commands/hello/world.ts](https://github.com/Fryuni/druidctl/blob/v0.0.0/src/commands/hello/world.ts)_
+* [`druidctl help [COMMAND]`](#druidctl-help-command)
+* [`druidctl plugins`](#druidctl-plugins)
+* [`druidctl plugins add PLUGIN`](#druidctl-plugins-add-plugin)
+* [`druidctl plugins:inspect PLUGIN...`](#druidctl-pluginsinspect-plugin)
+* [`druidctl plugins install PLUGIN`](#druidctl-plugins-install-plugin)
+* [`druidctl plugins link PATH`](#druidctl-plugins-link-path)
+* [`druidctl plugins remove [PLUGIN]`](#druidctl-plugins-remove-plugin)
+* [`druidctl plugins reset`](#druidctl-plugins-reset)
+* [`druidctl plugins uninstall [PLUGIN]`](#druidctl-plugins-uninstall-plugin)
+* [`druidctl plugins unlink [PLUGIN]`](#druidctl-plugins-unlink-plugin)
+* [`druidctl plugins update`](#druidctl-plugins-update)
 
 ## `druidctl help [COMMAND]`
 
@@ -399,5 +351,4 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/update.ts)_
-
 <!-- commandsstop -->
