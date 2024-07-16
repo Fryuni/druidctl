@@ -1,0 +1,82 @@
+{
+  "name": "druidctl",
+  "version": "0.0.0",
+  "description": "A CLI for Apache Druid management.",
+  "keywords": [
+    "oclif"
+  ],
+  "homepage": "https://github.com/Fryuni/druidctl",
+  "bugs": "https://github.com/Fryuni/druidctl/issues",
+  "repository": "Fryuni/druidctl",
+  "license": "MIT",
+  "author": "Luiz Ferraz <luiz@lferraz.com>",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "druidctl": "./bin/run.js"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/src",
+    "/oclif.manifest.json"
+  ],
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "prettier -w \"**/*\" --ignore-unknown --check",
+    "format": "prettier -w \"**/*\" --ignore-unknown --cache",
+    "prepack": "oclif manifest && oclif readme",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "posttest": "pnpm run lint",
+    "version": "oclif readme && git add README.md"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,astro,json,md,mdx}": "prettier --write"
+  },
+  "oclif": {
+    "bin": "druidctl",
+    "commands": "./dist/commands",
+    "dirname": "druidctl",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
+    ],
+    "topicSeparator": " ",
+    "topics": {
+      "hello": {
+        "description": "Say hello to the world and others"
+      }
+    }
+  },
+  "dependencies": {
+    "@oclif/core": "^4",
+    "@oclif/plugin-help": "^6",
+    "@oclif/plugin-plugins": "^5"
+  },
+  "devDependencies": {
+    "@oclif/prettier-config": "^0.2.1",
+    "@oclif/test": "^4",
+    "@types/chai": "^4",
+    "@types/mocha": "^10",
+    "@types/node": "^18",
+    "chai": "^4",
+    "eslint": "^8",
+    "eslint-config-oclif": "^5",
+    "eslint-config-oclif-typescript": "^3",
+    "eslint-config-prettier": "^9",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "mocha": "^10",
+    "oclif": "^4",
+    "prettier": "^3.3.3",
+    "shx": "^0.3.3",
+    "ts-node": "^10",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
