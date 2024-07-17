@@ -17,6 +17,9 @@ importers:
         specifier: ^5
         version: 5.3.7
     devDependencies:
+      '@croct/json':
+        specifier: ^2.1.0
+        version: 2.1.0
       '@oclif/prettier-config':
         specifier: ^0.2.1
         version: 0.2.1
@@ -387,6 +390,12 @@ packages:
         integrity: sha512-EStJpq4OuY8xYfhGVXngigBJRWxftKX9ksiGDnmlY3o7B/V7KIAc9X4oiK87uPJSc/vs5L869bem5fhZa8caZw==,
       }
     engines: { node: '>=6.9.0' }
+
+  '@croct/json@2.1.0':
+    resolution:
+      {
+        integrity: sha512-UrWfjNQVlBxN+OVcFwHmkjARMW55MBN04E9KfGac8ac8z1QnFVuiOOFtMWXCk3UwsyRqhsNaFoYLZC+xxqsVjQ==,
+      }
 
   '@cspotcode/source-map-support@0.8.1':
     resolution:
@@ -4987,6 +4996,8 @@ snapshots:
       chalk: 2.4.2
       js-tokens: 4.0.0
       picocolors: 1.0.1
+
+  '@croct/json@2.1.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
