@@ -8,8 +8,15 @@ type Configuration = {
 };
 
 export class DruidClient {
-	public constructor(private readonly config: Configuration) {}
+	#config: Configuration;
 
+	public constructor(config: Configuration) {
+		this.#config = config;
+	}
+
+	/**
+	 * Issue a GET request to the Druid REST API.
+	 */
 	public async get(url: string): Promise<JsonValue> {
 		if (URL.canParse(url)) {
 			throw new Error(
@@ -24,6 +31,9 @@ export class DruidClient {
 		return await r.json();
 	}
 
+	/**
+	 * Issue a POST request to the Druid REST API.
+	 */
 	public async post(url: string, body: JsonValue): Promise<JsonValue> {
 		if (URL.canParse(url)) {
 			throw new Error(
@@ -55,7 +65,7 @@ export class DruidClient {
 			headers: {
 				Accept: 'application/json',
 				...init?.headers,
-				...(await this.config.authenticationProvider.getAuthenticationHeaders(this.baseFetch)),
+				...(await this.#config.authenticationProvider.getAuthenticationHeaders(this.baseFetch)),
 			},
 		});
 	}
@@ -67,7 +77,7 @@ export class DruidClient {
 	 * This request is not automatically authenticated.
 	 */
 	private baseFetch(url: string | URL, init?: RequestInit): Promise<Response> {
-		return this.config.fetcher(this.expandUrl(url), init);
+		return this.#config.fetcher(this.expandUrl(url), init);
 	}
 
 	/**
@@ -76,6 +86,6 @@ export class DruidClient {
 	 * Absolute URLs are returned as-is.
 	 */
 	private expandUrl(url: string | URL): string {
-		return new URL(url, this.config.baseUrl).toString();
+		return new URL(url, this.#config.baseUrl).toString();
 	}
 }
