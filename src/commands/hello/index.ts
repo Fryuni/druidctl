@@ -1,19 +1,20 @@
 import { Args, Command, Flags } from '@oclif/core';
+import type { ArgInput, FlagInput } from '@oclif/core/interfaces';
 
 export default class Hello extends Command {
-	static args = {
+	static args: ArgInput = {
 		person: Args.string({ description: 'Person to say hello to', required: true }),
 	};
 
-	static description = 'Say hello';
+	static description: string = 'Say hello';
 
-	static examples = [
+	static examples: string[] = [
 		`<%= config.bin %> <%= command.id %> friend --from oclif
 hello friend from oclif! (./src/commands/hello/index.ts)
 `,
 	];
 
-	static flags = {
+	static flags: FlagInput = {
 		from: Flags.string({ char: 'f', description: 'Who is saying hello', required: true }),
 	};
 

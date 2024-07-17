@@ -24,6 +24,7 @@
   ],
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
+    "build:watch": "shx rm -rf dist && tsc --watch",
     "lint": "prettier -w \"**/*\" --ignore-unknown --check",
     "format": "prettier -w \"**/*\" --ignore-unknown --cache",
     "prepack": "oclif manifest && oclif readme",

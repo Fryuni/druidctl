@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "verbatimModuleSyntax": true,
+    "isolatedDeclarations": true,
+    "isolatedModules": true,
     "module": "Node16",
+    "moduleResolution": "node16",
     "outDir": "dist",
     "rootDir": "src",
+    "sourceMap": true,
     "strict": true,
     "target": "es2022",
-    "moduleResolution": "node16",
-    "sourceMap": true
+    "verbatimModuleSyntax": true
   },
   "include": ["./src/**/*"],
   "ts-node": {
