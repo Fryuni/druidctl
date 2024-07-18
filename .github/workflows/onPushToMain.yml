@@ -3,7 +3,7 @@ name: version, tag and github release
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'actions/**']
 
 jobs:
   release:
@@ -14,6 +14,25 @@ jobs:
       - uses: actions/checkout@v4
       - run: corepack enable
       - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Setup git
+        run: |
+          git config --global user.email '${{ secrets.GH_EMAIL }}'
+          git config --global user.name '${{ secrets.GH_USERNAME }}'
+      - name: Generate oclif README
+        id: oclif-readme
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          pnpm install
+          pnpm build
+          pnpm run version
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -am "chore: update README.md"
+            git push -u origin '${{ github.ref_name }}'
+          fi
       - name: Check if version already exists
         id: version-check
         run: |
@@ -32,23 +51,6 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Setup git
-        if: ${{ steps.version-check.outputs.skipped == 'false' }}
-        run: |
-          git config --global user.email void.bot@lferraz.com
-          git config --global user.name 'Void Bot'
-      - name: Generate oclif README
-        if: ${{ steps.version-check.outputs.skipped == 'false' }}
-        id: oclif-readme
-        run: |
-          pnpm install
-          pnpm exec oclif readme
-          pnpm format
-          if [ -n "$(git status --porcelain)" ]; then
-            git add .
-            git commit -am "chore: update README.md"
-            git push -u origin '${{ github.ref_name }}'
-          fi
       - name: Create Github Release
         uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5
         if: ${{ steps.version-check.outputs.skipped == 'false' }}

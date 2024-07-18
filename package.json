@@ -33,7 +33,7 @@
     "postpack": "shx rm -f oclif.manifest.json",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "posttest": "pnpm run lint",
-    "version": "oclif readme && git add README.md"
+    "version": "oclif readme && prettier -w README.md && git add README.md"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,astro,json,md,mdx}": "prettier --write"
