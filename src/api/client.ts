@@ -1,5 +1,11 @@
 import type { AuthenticationProvider } from './auth/provider.js';
 import type { JsonValue } from '@croct/json';
+import debugMod from 'debug';
+import { z } from 'zod';
+
+const debug = debugMod('druidctl:api:client');
+
+const SQL_SCHEMA = z.array(z.record(z.union([z.string(), z.number(), z.boolean()])));
 
 type Configuration = {
 	baseUrl: string | URL;
@@ -41,6 +47,8 @@ export class DruidClient {
 			);
 		}
 
+		debug('POST [>>>] %s', url);
+
 		const r = await this.fetch(this.expandUrl(url), {
 			method: 'POST',
 			headers: {
@@ -49,7 +57,13 @@ export class DruidClient {
 			body: JSON.stringify(body),
 		});
 
+		debug('POST [%d] %s (%d)', r.status, url, r.headers.get('Content-Length') ?? '0');
+
 		return await r.json();
+	}
+
+	public async sql<Z extends z.output<typeof SQL_SCHEMA>>(sql: string): Promise<Z> {
+		return SQL_SCHEMA.parse(await this.post('/druid/v2/sql', { query: sql })) as Z;
 	}
 
 	private async handleResponse(r: Response): Promise<JsonValue | Blob> {
