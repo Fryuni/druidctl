@@ -7,7 +7,9 @@ export class BasicAuthenticationProvider implements AuthenticationProvider {
 	) {}
 
 	public getAuthenticationHeaders(): Promise<HeadersInit> {
-		const encoded = Buffer.from(`${this.username}:${this.password}`).toString('base64');
+		const encoded = Buffer.from(`${this.username}:${this.password}`).toString(
+			'base64',
+		);
 		return Promise.resolve({ Authorization: `Basic ${encoded}` });
 	}
 }

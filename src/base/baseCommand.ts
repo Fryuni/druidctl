@@ -1,14 +1,31 @@
-import { Once } from '@inox-tools/utils/once';
+import type { JsonPrimitive } from '@croct/json';
 import { Command } from '@oclif/core';
+import type { Input, ParserOutput } from '@oclif/core/interfaces';
 
 export abstract class BaseCommand extends Command {
-	abstract initialize(): Promise<void>;
+	static override enableJsonFlag = true;
 
-	#initializer = new Once();
+	protected parse = this._parse.bind(this) as Command['parse'];
 
-	protected async _run<T>(): Promise<T> {
-		await this.#initializer.doAsync(() => this.initialize());
+	private readonly parsedFlags = new Map<Input<any, any, any>, ParserOutput>();
 
-		return super._run();
+	private async _parse(
+		options?: Input<any, any, any>,
+		argv?: string[],
+	): Promise<ParserOutput> {
+		if (options === undefined) return super.parse(options, argv);
+
+		const cached = this.parsedFlags.get(options);
+		if (cached) return cached;
+
+		const res = await super.parse(options, argv);
+		this.parsedFlags.set(options, res);
+		return res;
+	}
+
+	protected table(data: Array<Record<string, JsonPrimitive>>): void {
+		if (!this.jsonEnabled()) {
+			console.table(data);
+		}
 	}
 }

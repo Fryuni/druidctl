@@ -1,5 +1,6 @@
 import { Args } from '@oclif/core';
 import { DruidCommand } from '../../base/druidCommand.js';
+import type { JsonStructure } from '@croct/json';
 
 export default class ApiGet extends DruidCommand {
 	static override args = {
@@ -13,21 +14,24 @@ export default class ApiGet extends DruidCommand {
 
 	static override examples = ['<%= config.bin %> <%= command.id %> /health'];
 
-	public async run(): Promise<void> {
+	public async run(): Promise<JsonStructure> {
 		const { args } = await this.parse(ApiGet);
 
 		const res = await this.client.get(args.route);
 
 		if (res instanceof Blob) {
-			this.log(await res.text());
-			return;
+			const body = await res.text();
+			this.log(body);
+			return { body };
 		}
 
 		if (typeof res === 'string') {
 			this.log(res);
-			return;
+			return { body: res };
 		}
 
 		this.log(JSON.stringify(res, null, 2));
+
+		return { body: res };
 	}
 }

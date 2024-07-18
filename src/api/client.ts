@@ -5,7 +5,9 @@ import { z } from 'zod';
 
 const debug = debugMod('druidctl:api:client');
 
-const SQL_SCHEMA = z.array(z.record(z.union([z.string(), z.number(), z.boolean()])));
+const SQL_SCHEMA = z.array(
+	z.record(z.union([z.string(), z.number(), z.boolean(), z.null()])),
+);
 
 type Configuration = {
 	baseUrl: string | URL;
@@ -26,7 +28,8 @@ export class DruidClient {
 	public async get(url: string): Promise<JsonValue | Blob> {
 		if (URL.canParse(url)) {
 			throw new Error(
-				'URL must be relative, it will be applied over the ' + 'base URL of the Druid instance.',
+				'URL must be relative, it will be applied over the ' +
+					'base URL of the Druid instance.',
 			);
 		}
 
@@ -43,7 +46,8 @@ export class DruidClient {
 	public async post(url: string, body: JsonValue): Promise<JsonValue> {
 		if (URL.canParse(url)) {
 			throw new Error(
-				'URL must be relative, it will be applied over the ' + 'base URL of the Druid instance.',
+				'URL must be relative, it will be applied over the ' +
+					'base URL of the Druid instance.',
 			);
 		}
 
@@ -57,7 +61,12 @@ export class DruidClient {
 			body: JSON.stringify(body),
 		});
 
-		debug('POST [%d] %s (%d)', r.status, url, r.headers.get('Content-Length') ?? '0');
+		debug(
+			'POST [%d] %s (%d)',
+			r.status,
+			url,
+			r.headers.get('Content-Length') ?? '0',
+		);
 
 		return await r.json();
 	}
@@ -106,7 +115,16 @@ export class DruidClient {
 	 *
 	 * This request is not automatically authenticated.
 	 */
-	private baseFetch(url: string | URL, init?: RequestInit): Promise<Response> {
+	private baseFetch(url: string | URL, init: RequestInit = {}): Promise<Response> {
+		if (init.signal == null) {
+			const controller = new AbortController();
+			setTimeout(() => {
+				controller.abort('Timeout');
+			}, 5000);
+
+			init.signal = controller.signal;
+		}
+
 		return this.#config.fetcher(this.expandUrl(url), init);
 	}
 

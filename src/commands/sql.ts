@@ -1,6 +1,7 @@
 import { Args, Flags } from '@oclif/core';
 import { readFile } from 'node:fs/promises';
 import { DruidCommand } from '../base/druidCommand.js';
+import type { JsonStructure } from '@croct/json';
 
 export default class Sql extends DruidCommand {
 	static override args = {
@@ -19,11 +20,12 @@ export default class Sql extends DruidCommand {
 		}),
 	};
 
-	public async run(): Promise<void> {
+	public async run(): Promise<JsonStructure> {
 		const sql = await this.getSql();
 		const res = await this.client.sql(sql);
 
-		console.table(res);
+		this.table(res);
+		return res;
 	}
 
 	private async getSql(): Promise<string> {
