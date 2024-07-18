@@ -22,7 +22,7 @@ $ npm install -g druidctl
 $ druidctl COMMAND
 running command...
 $ druidctl (--version)
-druidctl/0.0.1-alpha.1 linux-x64 node-v20.12.2
+druidctl/0.0.1-alpha.1 linux-x64 node-v20.15.1
 $ druidctl --help [COMMAND]
 USAGE
   $ druidctl COMMAND
