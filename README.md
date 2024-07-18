@@ -22,7 +22,7 @@ $ npm install -g druidctl
 $ druidctl COMMAND
 running command...
 $ druidctl (--version)
-druidctl/0.0.1-alpha.0 linux-x64 node-v18.20.4
+druidctl/0.0.1-alpha.1 darwin-x64 node-v20.15.0
 $ druidctl --help [COMMAND]
 USAGE
   $ druidctl COMMAND
@@ -35,325 +35,83 @@ USAGE
 
 <!-- commands -->
 
-- [`druidctl help [COMMAND]`](#druidctl-help-command)
-- [`druidctl plugins`](#druidctl-plugins)
-- [`druidctl plugins add PLUGIN`](#druidctl-plugins-add-plugin)
-- [`druidctl plugins:inspect PLUGIN...`](#druidctl-pluginsinspect-plugin)
-- [`druidctl plugins install PLUGIN`](#druidctl-plugins-install-plugin)
-- [`druidctl plugins link PATH`](#druidctl-plugins-link-path)
-- [`druidctl plugins remove [PLUGIN]`](#druidctl-plugins-remove-plugin)
-- [`druidctl plugins reset`](#druidctl-plugins-reset)
-- [`druidctl plugins uninstall [PLUGIN]`](#druidctl-plugins-uninstall-plugin)
-- [`druidctl plugins unlink [PLUGIN]`](#druidctl-plugins-unlink-plugin)
-- [`druidctl plugins update`](#druidctl-plugins-update)
+- [`druidctl api get ROUTE`](#druidctl-api-get-route)
+- [`druidctl sql [SQL]`](#druidctl-sql-sql)
+- [`druidctl supervisor list`](#druidctl-supervisor-list)
 
-## `druidctl help [COMMAND]`
+## `druidctl api get ROUTE`
 
-Display help for druidctl.
+Send a raw GET request to the Druid REST API
 
 ```
 USAGE
-  $ druidctl help [COMMAND...] [-n]
+  $ druidctl api get ROUTE --url <value> [--json] [-u <value>]
 
 ARGUMENTS
-  COMMAND...  Command to show help for.
-
-FLAGS
-  -n, --nested-commands  Include all nested commands in the output.
-
-DESCRIPTION
-  Display help for druidctl.
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.6/src/commands/help.ts)_
-
-## `druidctl plugins`
-
-List installed plugins.
-
-```
-USAGE
-  $ druidctl plugins [--json] [--core]
-
-FLAGS
-  --core  Show core plugins.
+  ROUTE  API route to request
 
 GLOBAL FLAGS
-  --json  Format output as json.
+  -u, --user=<value>  User to authenticate as using basic auth
+      --json          Format output as json.
+      --url=<value>   (required) Base URL of the Druid instance
 
 DESCRIPTION
-  List installed plugins.
+  Send a raw GET request to the Druid REST API
 
 EXAMPLES
-  $ druidctl plugins
+  $ druidctl api get /health
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/index.ts)_
+_See code: [src/commands/api/get.ts](https://github.com/Fryuni/druidctl/blob/v0.0.1-alpha.1/src/commands/api/get.ts)_
 
-## `druidctl plugins add PLUGIN`
+## `druidctl sql [SQL]`
 
-Installs a plugin into druidctl.
+Execute SQL
 
 ```
 USAGE
-  $ druidctl plugins add PLUGIN... [--json] [-f] [-h] [-s | -v]
+  $ druidctl sql [SQL] --url <value> [--json] [-u <value>] [-f <value>]
 
 ARGUMENTS
-  PLUGIN...  Plugin to install.
+  SQL  SQL to execute
 
 FLAGS
-  -f, --force    Force npm to fetch remote resources even if a local copy exists on disk.
-  -h, --help     Show CLI help.
-  -s, --silent   Silences npm output.
-  -v, --verbose  Show verbose npm output.
+  -f, --file=<value>  read SQL from a file
 
 GLOBAL FLAGS
-  --json  Format output as json.
+  -u, --user=<value>  User to authenticate as using basic auth
+      --json          Format output as json.
+      --url=<value>   (required) Base URL of the Druid instance
 
 DESCRIPTION
-  Installs a plugin into druidctl.
-
-  Uses npm to install plugins.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  Use the DRUIDCTL_NPM_LOG_LEVEL environment variable to set the npm loglevel.
-  Use the DRUIDCTL_NPM_REGISTRY environment variable to set the npm registry.
-
-ALIASES
-  $ druidctl plugins add
+  Execute SQL
 
 EXAMPLES
-  Install a plugin from npm registry.
-
-    $ druidctl plugins add myplugin
-
-  Install a plugin from a github url.
-
-    $ druidctl plugins add https://github.com/someuser/someplugin
-
-  Install a plugin from a github slug.
-
-    $ druidctl plugins add someuser/someplugin
+  $ druidctl sql
 ```
 
-## `druidctl plugins:inspect PLUGIN...`
+_See code: [src/commands/sql.ts](https://github.com/Fryuni/druidctl/blob/v0.0.1-alpha.1/src/commands/sql.ts)_
 
-Displays installation properties of a plugin.
+## `druidctl supervisor list`
+
+list supervisors
 
 ```
 USAGE
-  $ druidctl plugins inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN...  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
+  $ druidctl supervisor list --url <value> [--json] [-u <value>]
 
 GLOBAL FLAGS
-  --json  Format output as json.
+  -u, --user=<value>  User to authenticate as using basic auth
+      --json          Format output as json.
+      --url=<value>   (required) Base URL of the Druid instance
 
 DESCRIPTION
-  Displays installation properties of a plugin.
+  list supervisors
 
 EXAMPLES
-  $ druidctl plugins inspect myplugin
+  $ druidctl supervisor list
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/inspect.ts)_
-
-## `druidctl plugins install PLUGIN`
-
-Installs a plugin into druidctl.
-
-```
-USAGE
-  $ druidctl plugins install PLUGIN... [--json] [-f] [-h] [-s | -v]
-
-ARGUMENTS
-  PLUGIN...  Plugin to install.
-
-FLAGS
-  -f, --force    Force npm to fetch remote resources even if a local copy exists on disk.
-  -h, --help     Show CLI help.
-  -s, --silent   Silences npm output.
-  -v, --verbose  Show verbose npm output.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Installs a plugin into druidctl.
-
-  Uses npm to install plugins.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  Use the DRUIDCTL_NPM_LOG_LEVEL environment variable to set the npm loglevel.
-  Use the DRUIDCTL_NPM_REGISTRY environment variable to set the npm registry.
-
-ALIASES
-  $ druidctl plugins add
-
-EXAMPLES
-  Install a plugin from npm registry.
-
-    $ druidctl plugins install myplugin
-
-  Install a plugin from a github url.
-
-    $ druidctl plugins install https://github.com/someuser/someplugin
-
-  Install a plugin from a github slug.
-
-    $ druidctl plugins install someuser/someplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/install.ts)_
-
-## `druidctl plugins link PATH`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ druidctl plugins link PATH [-h] [--install] [-v]
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help          Show CLI help.
-  -v, --verbose
-      --[no-]install  Install dependencies after linking the plugin.
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-
-EXAMPLES
-  $ druidctl plugins link myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/link.ts)_
-
-## `druidctl plugins remove [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ druidctl plugins remove [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  PLUGIN...  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ druidctl plugins unlink
-  $ druidctl plugins remove
-
-EXAMPLES
-  $ druidctl plugins remove myplugin
-```
-
-## `druidctl plugins reset`
-
-Remove all user-installed and linked plugins.
-
-```
-USAGE
-  $ druidctl plugins reset [--hard] [--reinstall]
-
-FLAGS
-  --hard       Delete node_modules and package manager related files in addition to uninstalling plugins.
-  --reinstall  Reinstall all plugins after uninstalling.
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/reset.ts)_
-
-## `druidctl plugins uninstall [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ druidctl plugins uninstall [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  PLUGIN...  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ druidctl plugins unlink
-  $ druidctl plugins remove
-
-EXAMPLES
-  $ druidctl plugins uninstall myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/uninstall.ts)_
-
-## `druidctl plugins unlink [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ druidctl plugins unlink [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  PLUGIN...  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ druidctl plugins unlink
-  $ druidctl plugins remove
-
-EXAMPLES
-  $ druidctl plugins unlink myplugin
-```
-
-## `druidctl plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ druidctl plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.3.7/src/commands/plugins/update.ts)_
+_See code: [src/commands/supervisor/list.ts](https://github.com/Fryuni/druidctl/blob/v0.0.1-alpha.1/src/commands/supervisor/list.ts)_
 
 <!-- commandsstop -->
