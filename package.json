@@ -1,9 +1,11 @@
 {
   "name": "druidctl",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "A CLI for Apache Druid management.",
   "keywords": [
-    "oclif"
+    "apache",
+    "druid",
+    "apache-druid"
   ],
   "homepage": "https://github.com/Fryuni/druidctl",
   "bugs": "https://github.com/Fryuni/druidctl/issues",
