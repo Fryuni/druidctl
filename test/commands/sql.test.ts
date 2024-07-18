@@ -1,6 +1,6 @@
-import { runCommand } from '@oclif/test';
 import { expect } from 'chai';
 import nock from 'nock';
+import { failCommand, succeedCommand } from '../helper.js';
 
 describe('sql', () => {
 	it('runs sql cmd', async () => {
@@ -10,13 +10,22 @@ describe('sql', () => {
 			})
 			.reply(200, [{ foo: 'bar' }]);
 
-		const { stdout, stderr, error } = await runCommand([
-			'sql',
-			'"SELECT foo FROM bar"',
-		]);
+		const { result } = await succeedCommand(['sql', 'SELECT foo FROM bar']);
 
-		console.log({ stdout, stderr, error: error?.message });
+		expect(result).to.eql([{ foo: 'bar' }]);
+	});
 
-		expect(stdout).to.contain('hello world');
+	it('requires a query or a file', async () => {
+		const { error } = await failCommand(['sql']);
+
+		expect(error).to.eql({
+			code: undefined,
+			message: 'Either --file or a SQL string must be specified, but not both',
+			oclif: {
+				exit: 2,
+			},
+			skipOclifErrorHandling: undefined,
+			suggestions: undefined,
+		});
 	});
 });
