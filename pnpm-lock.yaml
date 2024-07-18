@@ -7,6 +7,9 @@ settings:
 importers:
   .:
     dependencies:
+      '@inox-tools/utils':
+        specifier: ^0.1.3
+        version: 0.1.3
       '@oclif/core':
         specifier: ^4
         version: 4.0.12
@@ -59,6 +62,9 @@ importers:
       mocha:
         specifier: ^10
         version: 10.6.0
+      nock:
+        specifier: 14.0.0-beta.8
+        version: 14.0.0-beta.8
       oclif:
         specifier: ^4
         version: 4.14.6
@@ -456,6 +462,12 @@ packages:
       }
     deprecated: Use @eslint/object-schema instead
 
+  '@inox-tools/utils@0.1.3':
+    resolution:
+      {
+        integrity: sha512-UhneOA5PwcPhvcvcH1pW9wGZXRKASD7/MWHCrE+DbSzbMhzBTeUn1rKpssys8rDF51pr3FwgLFz1Cvjj2TMIwA==,
+      }
+
   '@inquirer/confirm@3.1.14':
     resolution:
       {
@@ -516,6 +528,13 @@ packages:
       {
         integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==,
       }
+
+  '@mswjs/interceptors@0.33.1':
+    resolution:
+      {
+        integrity: sha512-H6FIM3VMoLfZjKGt3kl3OaB6H7IkttDMSA0REmloCLnVBkIKHe4q7OAEHDZ8DNxOx1TCVguFO8a0BFn0eDzzlQ==,
+      }
+    engines: { node: '>=18' }
 
   '@nodelib/fs.scandir@2.1.5':
     resolution:
@@ -587,6 +606,24 @@ packages:
     engines: { node: '>=18.0.0' }
     peerDependencies:
       '@oclif/core': '>= 3.0.0'
+
+  '@open-draft/deferred-promise@2.2.0':
+    resolution:
+      {
+        integrity: sha512-CecwLWx3rhxVQF6V4bAgPS5t+So2sTbPgAzafKkVizyi7tlwpcFpdFqq+wqF2OwNBmqFuu6tOyouTuxgpMfzmA==,
+      }
+
+  '@open-draft/logger@0.3.0':
+    resolution:
+      {
+        integrity: sha512-X2g45fzhxH238HKO4xbSr7+wBS8Fvw6ixhTDuvLd5mqh6bJJCFAPwU9mPDxbcrRtfxv4u5IHCEH77BmxvXmmxQ==,
+      }
+
+  '@open-draft/until@2.1.0':
+    resolution:
+      {
+        integrity: sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==,
+      }
 
   '@sindresorhus/is@5.6.0':
     resolution:
@@ -2765,6 +2802,12 @@ packages:
       }
     engines: { node: '>= 0.4' }
 
+  is-node-process@1.2.0:
+    resolution:
+      {
+        integrity: sha512-Vg4o6/fqPxIjtxgUH5QLJhwZ7gW5diGCVlXpuUfELC62CuxM1iHcRe51f2W1FDy04Ai4KJkagKjx3XaqyfRKXw==,
+      }
+
   is-number-object@1.0.7:
     resolution:
       {
@@ -2959,6 +3002,12 @@ packages:
     resolution:
       {
         integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==,
+      }
+
+  json-stringify-safe@5.0.1:
+    resolution:
+      {
+        integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==,
       }
 
   json5@1.0.2:
@@ -3219,6 +3268,13 @@ packages:
         integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==,
       }
 
+  nock@14.0.0-beta.8:
+    resolution:
+      {
+        integrity: sha512-fKPzXHZozO7649AMCJttOZvYh8tO00e0jU3LYRYlxZb2rmB6e5+hmh57Vtazsd+42L/idm7q8qA09mRDCKzwiA==,
+      }
+    engines: { node: '>= 18' }
+
   normalize-package-data@2.5.0:
     resolution:
       {
@@ -3421,6 +3477,12 @@ packages:
       }
     engines: { node: '>= 0.8.0' }
 
+  outvariant@1.4.3:
+    resolution:
+      {
+        integrity: sha512-+Sl2UErvtsoajRDKCE5/dBz4DIvHXQQnAxtQTF04OJxY0+DyZXSo5P5Bb7XYWOh81syohlYL24hbDwxedPUJCA==,
+      }
+
   p-cancelable@3.0.0:
     resolution:
       {
@@ -3605,6 +3667,13 @@ packages:
         integrity: sha512-g8+OnU/L2v+wyiVK+D5fA34J7EH8jZ8DDlvwhRCMxmMj7UCBvxiO1mGeN+36JXIKF4zevU4kRBd8lVgG9vLelA==,
       }
     engines: { node: ^14.17.0 || ^16.13.0 || >=18.0.0 }
+
+  propagate@2.0.1:
+    resolution:
+      {
+        integrity: sha512-vGrhOavPSTz4QVNuBNdcNXePNdNMaO1xj9yBeH1ScQPjk/rhg9sSlCXPhMkFuaNNW/syTvYqsnbIJxMBfRbbag==,
+      }
+    engines: { node: '>= 8' }
 
   punycode@2.3.1:
     resolution:
@@ -3962,6 +4031,12 @@ packages:
     resolution:
       {
         integrity: sha512-xxRs31BqRYHwiMzudOrpSiHtZ8i/GeionCBDSilhYRj+9gIcI8wCZTlXZKu9vZIVqViP3dcp9qE5G6AlIaD+TQ==,
+      }
+
+  strict-event-emitter@0.5.1:
+    resolution:
+      {
+        integrity: sha512-vMgjE/GGEPEFnhFub6pa4FmJBRBVOLpIII2hvCZ8Kzb7K0hlHo7mQv6xYrBvCL2LtAIBwFUK8wvuJgTVSQ5MFQ==,
       }
 
   string-argv@0.3.2:
@@ -5038,6 +5113,8 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
+  '@inox-tools/utils@0.1.3': {}
+
   '@inquirer/confirm@3.1.14':
     dependencies:
       '@inquirer/core': 9.0.2
@@ -5086,6 +5163,15 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@mswjs/interceptors@0.33.1':
+    dependencies:
+      '@open-draft/deferred-promise': 2.2.0
+      '@open-draft/logger': 0.3.0
+      '@open-draft/until': 2.1.0
+      is-node-process: 1.2.0
+      outvariant: 1.4.3
+      strict-event-emitter: 0.5.1
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -5165,6 +5251,15 @@ snapshots:
       debug: 4.3.5(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
+
+  '@open-draft/deferred-promise@2.2.0': {}
+
+  '@open-draft/logger@0.3.0':
+    dependencies:
+      is-node-process: 1.2.0
+      outvariant: 1.4.3
+
+  '@open-draft/until@2.1.0': {}
 
   '@sindresorhus/is@5.6.0': {}
 
@@ -6728,6 +6823,8 @@ snapshots:
 
   is-negative-zero@2.0.3: {}
 
+  is-node-process@1.2.0: {}
+
   is-number-object@1.0.7:
     dependencies:
       has-tostringtag: 1.0.2
@@ -6809,6 +6906,8 @@ snapshots:
   json-schema-traverse@0.4.1: {}
 
   json-stable-stringify-without-jsonify@1.0.1: {}
+
+  json-stringify-safe@5.0.1: {}
 
   json5@1.0.2:
     dependencies:
@@ -6969,6 +7068,12 @@ snapshots:
       lower-case: 2.0.2
       tslib: 2.6.3
 
+  nock@14.0.0-beta.8:
+    dependencies:
+      '@mswjs/interceptors': 0.33.1
+      json-stringify-safe: 5.0.1
+      propagate: 2.0.1
+
   normalize-package-data@2.5.0:
     dependencies:
       hosted-git-info: 2.8.9
@@ -7082,6 +7187,8 @@ snapshots:
       type-check: 0.4.0
       word-wrap: 1.2.5
 
+  outvariant@1.4.3: {}
+
   p-cancelable@3.0.0: {}
 
   p-limit@2.3.0:
@@ -7162,6 +7269,8 @@ snapshots:
   prettier@3.3.3: {}
 
   proc-log@4.2.0: {}
+
+  propagate@2.0.1: {}
 
   punycode@2.3.1: {}
 
@@ -7368,6 +7477,8 @@ snapshots:
       spdx-license-ids: 3.0.18
 
   spdx-license-ids@3.0.18: {}
+
+  strict-event-emitter@0.5.1: {}
 
   string-argv@0.3.2: {}
 

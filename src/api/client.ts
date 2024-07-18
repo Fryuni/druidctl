@@ -17,7 +17,7 @@ export class DruidClient {
 	/**
 	 * Issue a GET request to the Druid REST API.
 	 */
-	public async get(url: string): Promise<JsonValue> {
+	public async get(url: string): Promise<JsonValue | Blob> {
 		if (URL.canParse(url)) {
 			throw new Error(
 				'URL must be relative, it will be applied over the ' + 'base URL of the Druid instance.',
@@ -28,7 +28,7 @@ export class DruidClient {
 			method: 'GET',
 		});
 
-		return await r.json();
+		return this.handleResponse(r);
 	}
 
 	/**
@@ -52,6 +52,22 @@ export class DruidClient {
 		return await r.json();
 	}
 
+	private async handleResponse(r: Response): Promise<JsonValue | Blob> {
+		const contentType = r.headers.get('Content-Type');
+		if (!contentType) {
+			return await r.blob();
+		}
+
+		switch (true) {
+			case contentType.startsWith('application/json'):
+				return await r.json();
+			case contentType.startsWith('text/'):
+				return await r.text();
+			default:
+				return await r.blob();
+		}
+	}
+
 	/**
 	 * Fetch implementation accepting URLs relative to the base
 	 * URL of the Druid instance.
@@ -65,7 +81,7 @@ export class DruidClient {
 			headers: {
 				Accept: 'application/json',
 				...init?.headers,
-				...(await this.#config.authenticationProvider.getAuthenticationHeaders(this.baseFetch)),
+				...(await this.#config.authenticationProvider.getAuthenticationHeaders()),
 			},
 		});
 	}

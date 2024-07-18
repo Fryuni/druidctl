@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "isolatedDeclarations": true,
     "isolatedModules": true,
     "module": "Node16",
     "moduleResolution": "node16",
